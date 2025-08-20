@@ -3,9 +3,12 @@ package com.example.gestionemagazzino.Aspect;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
+@Aspect
+@Component
 public class AspectControllerDeposito {
 
     @Pointcut(value = "execution(* com.example.gestionemagazzino.Controller.DepositoController.*(..))")
