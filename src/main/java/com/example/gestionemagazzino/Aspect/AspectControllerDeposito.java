@@ -1,9 +1,8 @@
 package com.example.gestionemagazzino.Aspect;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 
 import java.util.Arrays;
 
@@ -22,5 +21,20 @@ public class AspectControllerDeposito {
     public void exit(JoinPoint joinPoint) {
         System.out.println("exit to  depositoController method " + joinPoint.getSignature().getName());
         System.out.println( "lista: "+ Arrays.toString(joinPoint.getArgs()));
+    }
+
+    @Around(value = "metodi()")
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+        long tempoDiEntrata = System.currentTimeMillis();
+        Object proceed = joinPoint.proceed();
+
+        long tempoDiFine = System.currentTimeMillis();
+        System.out.println( "tempo di esecuzione del metodo " + joinPoint.getSignature().getName() + " : " + (tempoDiFine - tempoDiEntrata) + " ms");
+        return proceed;
+    }
+
+    @AfterThrowing(value = "metodi()")
+    public void exception(JoinPoint joinPoint) {
+        System.out.print("Qualcosa è andato storto, è stata lanciata una eccezione per il seguente metodo "+joinPoint.getSignature().getName());
     }
 }
