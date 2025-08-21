@@ -42,7 +42,8 @@ public class SecurityConfig {
                         .requestMatchers("/banco/**").permitAll()
                         .requestMatchers("/deposito/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
-                ).formLogin(Customizer.withDefaults()).build();
+                )
+                .formLogin(Customizer.withDefaults())
+                .build();
     }
-
 }
