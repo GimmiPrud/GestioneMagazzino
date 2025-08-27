@@ -38,7 +38,7 @@ public class SecurityConfig {
     public SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(a -> a
+                .authorizeHttpRequests(au -> au
                         .requestMatchers("/banco/**").permitAll()
                         .requestMatchers("/deposito/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
