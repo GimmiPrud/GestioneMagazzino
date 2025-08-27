@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(Customizer.withDefaults())
+                .httpBasic(Customizer.withDefaults())
                 .build();
     }
 }
